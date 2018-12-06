@@ -29,6 +29,12 @@ nfs_master = node['cfncluster']['cfn_master']
 # Mount EFS directory with efs_mount recipe
 include_recipe 'aws-parallelcluster::efs_mount'
 
+# Only run FSx on centos for now
+if node['platform'] == 'centos'
+  # Install FSx
+  include_recipe 'aws-parallelcluster::mount_fsx'
+end
+
 # Mount /home over NFS
 mount '/home' do
   device "#{nfs_master}:/home"

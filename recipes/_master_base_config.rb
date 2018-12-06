@@ -117,6 +117,12 @@ nfs_export "/home" do
   options ['no_root_squash']
 end
 
+# Only run FSx on centos for now
+if node['platform'] == 'centos'
+  # Install FSx
+  include_recipe 'aws-parallelcluster::mount_fsx'
+end
+
 # Configure Ganglia on the Master
 if node['cfncluster']['ganglia_enabled'] == 'yes'
   template '/etc/ganglia/gmetad.conf' do
