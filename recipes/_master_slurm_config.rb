@@ -43,13 +43,6 @@ template '/opt/slurm/etc/slurm.conf' do
   mode '0644'
 end
 
-template '/opt/slurm/etc/slurm_parallelcluster_nodes.conf' do
-  source 'slurm_parallelcluster_nodes.conf.erb'
-  owner 'root'
-  group 'root'
-  mode '0644'
-end
-
 template '/opt/slurm/etc/gres.conf' do
   source 'gres.conf.erb'
   owner 'root'
@@ -57,11 +50,31 @@ template '/opt/slurm/etc/gres.conf' do
   mode '0644'
 end
 
-template '/opt/slurm/etc/slurm_parallelcluster_gres.conf' do
-  source 'slurm_parallelcluster_gres.conf.erb'
+# Copy pcluster config generator and templates
+remote_directory "#{node['cfncluster']['scripts_dir']}/slurm" do
+  source 'slurm'
+  mode '0700'
+  action :create
+  recursive true
+end
+
+# Copy slurm generator script
+cookbook_file "#{node['cfncluster']['scripts_dir']}/generate_slurm_config.py" do
+  source 'slurm/generate_slurm_config.py'
   owner 'root'
   group 'root'
-  mode '0644'
+  mode '0755'
+end
+
+# Copy queue config file from S3 URI
+execute "copy_queue_config_from_s3" do
+  command "aws s3 cp #{node['cfncluster']['slurm']['queue_config_s3_uri']} #{node['cfncluster']['slurm']['queue_config_path']}"
+end
+
+# TO-DO: verify directories and input file path
+# Generate pcluster specific configs
+execute "generate_pcluster_slurm_configs" do
+  command "/usr/local/pyenv/versions/cookbook_virtualenv/bin/python #{node['cfncluster']['scripts_dir']}/generate_slurm_config.py --output-directory /opt/slurm/etc/ --template-directory #{node['cfncluster']['scripts_dir']}/slurm/templates/ --input-file #{node['cfncluster']['slurm']['queue_config_path']}"
 end
 
 # alinux1 and centos6 use an old cgroup directory: /cgroup
