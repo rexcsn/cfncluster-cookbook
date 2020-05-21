@@ -86,6 +86,21 @@ template '/opt/slurm/etc/cgroup.conf' do
   mode '0644'
 end
 
+# Copy resume and suspend programs
+template '/home/slurm/slurm_resume' do
+  source 'slurm_resume.erb'
+  user 'slurm'
+  group 'slurm'
+  mode '0755'
+end
+
+template '/home/slurm/slurm_suspend' do
+  source 'slurm_suspend.erb'
+  user 'slurm'
+  group 'slurm'
+  mode '0755'
+end
+
 cookbook_file '/opt/slurm/etc/slurm.sh' do
   source 'slurm.sh'
   owner 'root'
