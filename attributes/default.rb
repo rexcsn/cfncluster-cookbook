@@ -224,6 +224,13 @@ when 'rhel', 'amazon'
         default['cfncluster']['lustre']['kmod_url'] = 'https://downloads.whamcloud.com/public/lustre/lustre-2.10.5/el7.5.1804/client/RPMS/x86_64/kmod-lustre-client-2.10.5-1.el7.x86_64.rpm'
         default['cfncluster']['lustre']['client_url'] = 'https://downloads.whamcloud.com/public/lustre/lustre-2.10.5/el7.5.1804/client/RPMS/x86_64/lustre-client-2.10.5-1.el7.x86_64.rpm'
       end
+    elsif node['platform_version'].to_i == 8
+      default['cfncluster']['base_packages'] = %w[vim ksh tcsh zsh openssl-devel ncurses-devel pam-devel net-tools openmotif-devel
+                                                  libXmu-devel hwloc-devel libdb-devel tcl-devel automake autoconf pyparted libtool
+                                                  httpd boost-devel redhat-lsb mlocate lvm2 mpich-devel R atlas-devel
+                                                  blas-devel fftw-devel libffi-devel openssl-devel dkms mariadb-devel libedit-devel
+                                                  libical-devel postgresql-devel postgresql-server sendmail libxml2-devel libglvnd-devel mdadm python3 python3-pip
+                                                  libssh2-devel libgcrypt-devel libevent-devel glibc-static bind-utils firewalld]
     end
     default['cfncluster']['kernel_devel_pkg']['name'] = "kernel-lt-devel" if node['platform'] == 'centos' && node['platform_version'].to_i >= 6 && node['platform_version'].to_i < 7
     default['cfncluster']['rhel']['extra_repo'] = 'rhui-REGION-rhel-server-releases-optional' if node['platform'] == 'redhat' && node['platform_version'].to_i >= 6 && node['platform_version'].to_i < 7

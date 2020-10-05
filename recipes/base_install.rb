@@ -31,6 +31,12 @@ when 'rhel', 'amazon'
     execute 'yum-config-manager_skip_if_unavail' do
       command "yum-config-manager --setopt=\*.skip_if_unavailable=1 --save"
     end
+  elsif node['platform_version'].to_i == 8
+    # Enable PowerTools Repo so *-devel packages can be installed with DNF
+    # Enable EPEL repos
+    execute 'dnf enable powertools and EPEL repos' do
+      command "dnf config-manager --set-enabled PowerTools && dnf install -y epel-release"
+    end
   end
 
   if node['platform'] == 'redhat'
