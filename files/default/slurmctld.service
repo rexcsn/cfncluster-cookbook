@@ -8,9 +8,7 @@ Type=simple
 EnvironmentFile=-/etc/sysconfig/slurmctld
 ExecStart=/opt/slurm/sbin/slurmctld -D $SLURMCTLD_OPTIONS
 ExecReload=/bin/kill -HUP $MAINPID
-LimitNOFILE=562930
-LimitMEMLOCK=infinity
-LimitSTACK=infinity
+LimitNOFILE=65536
 
 [Install]
 WantedBy=multi-user.target
