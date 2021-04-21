@@ -16,7 +16,6 @@
                         "spot_price": null,
                         "vcpus": 2,
                         "gpus": 0,
-                        "gpu_type": "no_gpu_type",
                         "enable_efa": false
                     },
                     "multiple_spot_c5.2xlarge": {
@@ -26,7 +25,6 @@
                         "spot_price": 1.5,
                         "vcpus": 4,
                         "gpus": 0,
-                        "gpu_type": "no_gpu_type",
                         "enable_efa": false
                     }
                 }
@@ -40,7 +38,6 @@
                         "spot_price": null,
                         "vcpus": 36,
                         "gpus": 0,
-                        "gpu_type": "no_gpu_type",
                         "enable_efa": true
                     }
                 },
@@ -58,7 +55,6 @@
                         "spot_price": null,
                         "vcpus": 16,
                         "gpus": 2,
-                        "gpu_type": "M60",
                         "enable_efa": false
                     },
                     "gpu_p3dn.24xlarge": {
@@ -68,7 +64,6 @@
                         "spot_price": null,
                         "vcpus": 48,
                         "gpus": 8,
-                        "gpu_type": "V100",
                         "enable_efa": false
                     }
                 },
