@@ -153,8 +153,8 @@ default['cfncluster']['nvidia']['fabricmanager']['repository_uri'] = value_for_p
 )
 
 # EFA
-default['cfncluster']['efa']['installer_version'] = '1.12.1'
-default['cfncluster']['efa']['installer_url'] = "https://efa-installer.amazonaws.com/aws-efa-installer-#{node['cfncluster']['efa']['installer_version']}.tar.gz"
+default['cfncluster']['efa']['installer_version'] = '1.12.2'
+default['cfncluster']['efa']['installer_url'] = "https://aws-efa-installer-dev.s3.us-west-2.amazonaws.com/aws-efa-installer-1.12.2-202106140610-a49d5fc.tar.gz"
 default['cfncluster']['enable_efa_gdr'] = "no"
 default['cfncluster']['efa']['unsupported_aarch64_oses'] = %w[centos7 centos8]
 
